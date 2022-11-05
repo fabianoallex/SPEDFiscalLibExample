@@ -3,10 +3,8 @@
         <scritps>
             <script name="validate_cpf" file="scripts\validate_cpf.js" />
             <script name="validate_cnpj" file="scripts\validate_cnpj.js" />
-            <script name="validate_cidade" file="scripts\validate_cidade.js" />
             <script name="validate_cpf_cnpj_0000" file="scripts\validate_cpf_cnpj_0000.js" />
             <script name="validate_reg_0002" file="scripts\validate_reg_0002.js" />
-            <script name="validate_dates_0000" file="scripts\validate_dates_0000.js" />
         </scritps>
         <regexs>
             <regex name="number" expression="[0-9]" fail_message="não é um número"/>
@@ -29,7 +27,7 @@
             <fields>
                 <field name="COD_VER" pos="02" type="number" size="3" dec="" format="000" description="" required="O"/>
                 <field name="COD_FIN" pos="03" type="number" size="1" dec="" format="" description="" required="O"
-                       validations="finalidade_arquivo, validate_cpf222"/>
+                       validations="finalidade_arquivo"/>
                 <field name="DT_INI" pos="04" type="date" size="" dec="" format="ddMMyyyy" description="" required="O" validations="validate_dates_0000"/>
                 <field name="DT_FIN" pos="05" type="date" size="" dec="" format="ddMMyyyy" description="" required="O" validations="validate_dates_0000"/>
                 <field name="NOME" pos="06" type="string" size="100" dec="" format="" description="" required="O"/>
@@ -40,7 +38,7 @@
                 <field name="UF" pos="09" type="string" size="2" dec="" format="" description="" required="O" validations="uf"/>
                 <field name="IE" pos="10" type="string" size="14" dec="" format="" description="" required="O" validations="ie"/>
                 <field name="COD_MUN" pos="11" type="number" size="" dec="" format="" description="" required="O"
-                       validations="codigo_municipio, validate_cidade"/>
+                       validations="codigo_municipio, validate_codigo_municipio"/>
                 <field name="IM" pos="12" type="string" size="" dec="" format="" description="" required="OC"/>
                 <field name="SUFRAMA" pos="13" type="string" size="9" dec="" format="" description="" required="OC"/>
                 <field name="IND_PERFIL" pos="14" type="string" size="1" dec="" format="" description="" required="O" validations="perfil_apresentacao"/>
@@ -67,7 +65,7 @@
                 <field name="BAIRRO" pos="07" type="string" size="60" dec="" format="" description="" required="O"/>
                 <field name="FONE" pos="08" type="string" size="11" dec="" format="" description="" required="OC"/>
                 <field name="FAX" pos="09" type="string" size="11" dec="" format="" description="" required="OC"/>
-                <field name="EMAIL" pos="10" type="string" size="" dec="" format="" description="" required="OC" validations="email"/>
+                <field name="EMAIL" pos="10" type="string" size="" dec="" format="" description="" required="OC" validations=""/>
             </fields>
         </register>
         <register name="0015" parent="0001" parent_type="register">

@@ -1,40 +1,23 @@
 import SPEDFiscal.*;
 
 import java.io.FileWriter;
-import java.net.URL;
 import java.util.Date;
-
-class MyValidationHelper implements ValidationHelper {
-    @Override
-    public String[] getValidationNames() {
-        return new String[] {
-                "validate_cpf222",
-                "validate_cnpj"
-        };
-    }
-
-    @Override
-    public boolean validate(String validationName, String value, Register register) {
-        if (validationName.equals("validate_cpf222")) {
-            return validate_cpf(value);
-        }
-
-        return true;
-    }
-
-    private boolean validate_cpf(String cpf){
-        return false;
-    }
-}
+import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) {
         try {
             //configurações utilizadas pela classe SPEDGenerator
 
-            URL urlDefinitions = Main.class.getClassLoader().getResource("definitions.xml");
-            Definitions definitions = new Definitions(urlDefinitions.toURI().toString(), new MyValidationHelper());
-            SPEDGenerator spedGenerator = new SPEDGenerator(definitions);
+            SPEDGenerator spedGenerator = new SPEDGenerator(
+                    new Definitions(
+                            Objects.requireNonNull(
+                                    Main.class.getClassLoader().getResource("definitions.xml")
+                            ).toURI().toString(),
+                            new MyValidation()
+                    )
+            );
+
             Register r = spedGenerator.getOpeningRegister();  //0000
 
             r.setFieldValue("COD_VER", 14);
@@ -45,7 +28,7 @@ public class Main {
             r.setFieldValue("CPF", "123456789-10");
             r.setFieldValue("CNPJ", "00.360.305/0001-04");
             r.setFieldValue("UF", "");
-            r.setFieldValue("COD_MUN", 5221602);
+            r.setFieldValue("COD_MUN", 1501452);
             r.setFieldValue("IND_PERFIL", "A");
             r.setFieldValue("IE", "ISENTO");
             r.setFieldValue("IND_ATIV", 0);
@@ -90,7 +73,7 @@ public class Main {
             Block bc = spedGenerator.addBlock("C");
             r = bc.addRegister("C100");
 
-            for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < 4; i++) {
                 Register c590 = bc.addRegister("C590");
                 Register c591 = c590.addRegister("C591");
                 c591.setFieldValue("VL_FCP_OP", 2555.9933 + i);
@@ -190,6 +173,17 @@ public class Main {
             |9900|9900|20|
             |9990|23|
             |9999|43|
+
+            0000.DT_INI: "05112022": "Data de início e fim devem ser no mesmo mês e ano"
+            0000.DT_FIN: "31121969": "Data de início e fim devem ser no mesmo mês e ano"
+            0000.CNPJ: "00360305000104": "Informe apenas CNPJ ou CPF para o Registro 0000".
+            0000.CPF: "12345678910": "Digito verificador invalido".
+            0000.CPF: "12345678910": "Informe apenas CNPJ ou CPF para o Registro 0000".
+            0000.UF: "Campo ogrigatório não informado".
+            0000.COD_MUN: "1501452": "Dígito verificador do Código do Município inválido"
+            0005.CEP: "Campo ogrigatório não informado".
+
+
             *
             * */
         } catch (Exception e) {
