@@ -1,7 +1,7 @@
-import SPEDFiscal.FieldNotFoundException;
-import SPEDFiscal.Register;
-import SPEDFiscal.ValidationHelper;
-import SPEDFiscal.ValidationMessage;
+import SPEDFiscalLib.FieldNotFoundException;
+import SPEDFiscalLib.Register;
+import SPEDFiscalLib.ValidationHelper;
+import SPEDFiscalLib.ValidationMessage;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

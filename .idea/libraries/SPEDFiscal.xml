@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="SPEDFiscal">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../SPEDFiscalLib/out/artifacts/SPEDFiscal_jar/SPEDFiscal.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../SPEDFiscalLib/out/artifacts/SPEDFiscalLib_jar/SPEDFiscal.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
