@@ -5,21 +5,25 @@ import java.io.FileWriter;
 import java.util.Date;
 import java.util.Objects;
 
+
+
 public class Main {
     public static void main(String[] args) {
         try {
             //configurações utilizadas pela classe SPEDGenerator
 
-            SPEDGenerator spedGenerator = new SPEDGenerator(
-                    new Definitions(
-                            Objects.requireNonNull(
-                                    Main.class.getClassLoader().getResource("definitions.xml")
-                            ).toURI().toString(),
-                            new MyValidation()
-                    )
+
+            Definitions definitions = new Definitions(
+                    Objects.requireNonNull(
+                            Main.class.getClassLoader().getResource("definitions.xml")
+                    ).toURI().toString(),
+                    new MyValidation()
             );
 
-            Register r = spedGenerator.getOpeningRegister();  //0000
+            SPEDFactory factory = new SPEDFactory(definitions);
+            SPEDGenerator spedGenerator = factory.createSPEDGenerator();
+
+            Register r = spedGenerator.getOpeningRegister().getRegister();  //0000
 
             r.setFieldValue("COD_VER", 14);
             r.setFieldValue("COD_FIN", 1);
