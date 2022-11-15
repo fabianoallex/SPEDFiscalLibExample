@@ -1,11 +1,7 @@
-
 import SPEDFiscalLib.*;
-
 import java.io.FileWriter;
 import java.util.Date;
 import java.util.Objects;
-
-
 
 public class Main {
     public static void main(String[] args) {
@@ -23,7 +19,7 @@ public class Main {
             SPEDFactory factory = new SPEDFactory(definitions);
             SPEDGenerator spedGenerator = factory.createSPEDGenerator();
 
-            Register r = spedGenerator.getOpeningRegister().getRegister();  //0000
+            Register r = spedGenerator.getRegister0000().getRegister();  //0000
 
             r.setFieldValue("COD_VER", 14);
             r.setFieldValue("COD_FIN", 1);
@@ -111,7 +107,7 @@ public class Main {
 
             if (writerOptions == 2) {
                 //exemplo implementando Writer em uma lambda
-                spedGenerator.write(string -> System.out.println(string));
+                spedGenerator.write((string, register) -> System.out.println(string));
             }
 
 
