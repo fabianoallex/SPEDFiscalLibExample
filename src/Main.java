@@ -16,7 +16,7 @@ public class Main {
                     new MyValidation()
             );
 
-            SPEDFactory factory = new SPEDFactory(definitions);
+            Factory factory = new Factory(definitions);
             SPEDGenerator spedGenerator = factory.createSPEDGenerator();
 
             Register r = spedGenerator.getRegister0000().getRegister();  //0000
@@ -92,7 +92,7 @@ public class Main {
 
             //Exemplo com StringBuilder
             if (writerOptions == 0) {
-                SPEDStringBuilder writer = new SPEDStringBuilder(new StringBuilder());
+                StringBuilderWriter writer = new StringBuilderWriter(new StringBuilder());
                 spedGenerator.write(writer);
                 System.out.println(writer.stringBuilder().toString());
             }
@@ -101,7 +101,7 @@ public class Main {
             if (writerOptions == 1) {
                 //exemplo com FileWriter:
                 FileWriter fileWriter = new FileWriter("c:/executaveis/teste2.txt");
-                SPEDFileWriter writer = new SPEDFileWriter(fileWriter);
+                FileWriterWriter writer = new FileWriterWriter(fileWriter);
                 fileWriter.close();
             }
 
