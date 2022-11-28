@@ -1,4 +1,4 @@
-import SPEDFiscalLib.*;
+import sped.lib.*;
 import java.io.FileWriter;
 import java.util.Date;
 import java.util.Objects;
