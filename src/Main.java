@@ -1,5 +1,8 @@
+import org.xml.sax.InputSource;
 import sped.lib.*;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.Objects;
 
@@ -8,13 +11,18 @@ public class Main {
         try {
             //configurações utilizadas pela classe SPEDGenerator
 
-
             Definitions definitions = new Definitions(
-                    Objects.requireNonNull(
-                            Main.class.getClassLoader().getResource("definitions.xml")
-                    ).toURI().toString(),
+                    "definitions.xml",
                     new MyValidation()
             );
+
+            definitions.setFileLoader(fileName -> {
+                try {
+                    return Objects.requireNonNull(Main.class.getClassLoader().getResource(fileName)).openStream();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
             Factory factory = new Factory(definitions);
             SPEDGenerator spedGenerator = factory.createSPEDGenerator();
