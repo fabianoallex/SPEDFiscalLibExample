@@ -19,7 +19,7 @@ public class Main {
             });
 
             Factory factory = new Factory(definitions);
-            SPEDGenerator spedGenerator = factory.createSPEDGenerator();
+            SpedGenerator spedGenerator = factory.createSPEDGenerator();
 
             Register r = spedGenerator.getRegister0000().getRegister();  //0000
 
