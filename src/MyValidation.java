@@ -1,7 +1,7 @@
-import sped.lib.FieldNotFoundException;
-import sped.lib.Register;
-import sped.lib.ValidationHelper;
-import sped.lib.ValidationMessage;
+import sped.core.FieldNotFoundException;
+import sped.core.Register;
+import sped.core.ValidationHelper;
+import sped.core.ValidationMessage;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

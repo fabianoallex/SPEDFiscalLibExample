@@ -1,10 +1,10 @@
 <definitions>
     <validations>
         <scritps>
-            <script name="validate_cpf" file="scripts\validate_cpf.js" />
-            <script name="validate_cnpj" file="scripts\validate_cnpj.js" />
-            <script name="validate_cpf_cnpj_0000" file="scripts\validate_cpf_cnpj_0000.js" />
-            <script name="validate_reg_0002" file="scripts\validate_reg_0002.js" />
+            <script name="validate_cpf" file="scripts/validate_cpf.js" />
+            <script name="validate_cnpj" file="scripts/validate_cnpj.js" />
+            <script name="validate_cpf_cnpj_0000" file="scripts/validate_cpf_cnpj_0000.js" />
+            <script name="validate_reg_0002" file="scripts/validate_reg_0002.js" />
         </scritps>
         <regexs>
             <regex name="number" expression="[0-9]" fail_message="não é um número"/>

@@ -1,20 +1,14 @@
-import org.xml.sax.InputSource;
-import sped.lib.*;
+import sped.core.*;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
 import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            //configurações utilizadas pela classe SPEDGenerator
-
-            Definitions definitions = new Definitions(
-                    "definitions.xml",
-                    new MyValidation()
-            );
+            String xmlFile = "definitions.xml";
+            Definitions definitions = new Definitions(xmlFile, new MyValidation());
 
             definitions.setFileLoader(fileName -> {
                 try {
