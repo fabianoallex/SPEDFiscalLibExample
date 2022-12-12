@@ -7,22 +7,13 @@ import java.util.Objects;
 public class Main {
     public static void main(String[] args) {
         try {
-            String xmlFile = "definitions.xml";
-            Definitions definitions = new Definitions(xmlFile, new MyValidation());
+            SpedGenerator spedGenerator =
+                    (SpedGenerator) new SpedGenerator.Builder("definitions.xml")
+                    .setValidationHelper(new MyValidation())
+                    .setFileLoader(fileName -> Objects.requireNonNull(Main.class.getResourceAsStream(fileName)))
+                    .build();
 
-            definitions.setFileLoader(fileName -> {
-                try {
-                    return Objects.requireNonNull(Main.class.getClassLoader().getResource(fileName)).openStream();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-            Factory factory = new Factory(definitions);
-            SpedGenerator spedGenerator = factory.createSPEDGenerator();
-
-            Register r = spedGenerator.getRegister0000().getRegister();  //0000
-
+            Register r = spedGenerator.getRegister0000().getRegister();
             r.setFieldValue("COD_VER", 14);
             r.setFieldValue("COD_FIN", 1);
             r.setFieldValue("DT_INI", new Date());
@@ -37,7 +28,6 @@ public class Main {
             r.setFieldValue("IND_ATIV", 0);
 
             Block b0 = spedGenerator.addBlock("0", "0001", "0990");
-
             r = b0.addRegister("0002");
             r.setFieldValue("CLAS_ESTAB_IND", "05");
 
