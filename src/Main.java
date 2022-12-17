@@ -1,14 +1,12 @@
 import sped.core.*;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            SpedGenerator spedGenerator =
-                    (SpedGenerator) new SpedGenerator.Builder("definitions.xml")
+            var spedGenerator = SpedGenerator.newBuilder("definitions.xml")
                     .setValidationHelper(new MyValidation())
                     .setFileLoader(fileName -> Objects.requireNonNull(Main.class.getResourceAsStream(fileName)))
                     .build();
@@ -27,7 +25,12 @@ public class Main {
             r.setFieldValue("IE", "ISENTO");
             r.setFieldValue("IND_ATIV", 0);
 
-            Block b0 = spedGenerator.addBlock("0", "0001", "0990");
+            Block b0 = spedGenerator.newBlockBuilder()
+                    .setBlockName("0")
+                    .setClosureRegisterName("0001")
+                    .setClosureRegisterName("0990")
+                    .build();
+
             r = b0.addRegister("0002");
             r.setFieldValue("CLAS_ESTAB_IND", "05");
 
@@ -63,7 +66,12 @@ public class Main {
             r.setFieldValue("DESCR_ANT_ITEM", "ABACATE ANTIGO");
 
 
-            Block bc = spedGenerator.addBlock("C", "C001", "C990");
+            Block bc = spedGenerator.newBlockBuilder()
+                    .setBlockName("C")
+                    .setClosureRegisterName("C001")
+                    .setClosureRegisterName("C990")
+                    .build();
+
             r = bc.addRegister("C100");
 
             for (int i = 0; i < 4; i++) {
@@ -73,8 +81,17 @@ public class Main {
                 c591.setFieldValue("VL_FCP_ST", 2333.09 + 2*i);
             }
 
-            Block bd = spedGenerator.addBlock("D", "D001", "D990");
-            Block be = spedGenerator.addBlock("E", "E001", "E990");
+            Block bd = spedGenerator.newBlockBuilder()
+                    .setBlockName("D")
+                    .setClosureRegisterName("D001")
+                    .setClosureRegisterName("D990")
+                    .build();
+
+            Block be = spedGenerator.newBlockBuilder()
+                    .setBlockName("E")
+                    .setClosureRegisterName("E001")
+                    .setClosureRegisterName("E990")
+                    .build();
 
             //totalizacao: gerar os registros de contagem (bloco 9)
             spedGenerator.generateBlock9();
